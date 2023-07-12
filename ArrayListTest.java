@@ -9,12 +9,12 @@ public class ArrayListTest {
 
     ArrayList<Integer> arrayList;
 
-    @Before                                         
+    @Before
     public void setUp() {
         arrayList = new ArrayList<>();
     }
 
-    @Test                                               
+    @Test
     public void testAddToFront() {
         arrayList.addToFront(1);
 
@@ -53,7 +53,7 @@ public class ArrayListTest {
         Assert.assertEquals(0, arrayList.size());
     }
 
-        @Test
+    @Test
     public void testRemove8FromFront() {
         for (int i = 1; i <= 9; i++) {
             arrayList.addToBack(i);
@@ -67,11 +67,10 @@ public class ArrayListTest {
         Assert.assertEquals(0, arrayList.size());
     }
 
-    @Test(expected = NoSuchElementException.class)                                               
+    @Test(expected = NoSuchElementException.class)
     public void testRemoveFromFrontWithEmptyList() {
         arrayList.removeFromFront();
     }
-    
 
     @Test
     public void testRemove10FromBack() {

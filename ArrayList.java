@@ -25,7 +25,7 @@ public class ArrayList<T> {
      * so instead we cast an Object[] to a T[] to get the generic typing.
      */
     public ArrayList() {
-        //DO NOT MODIFY THIS METHOD!
+        // DO NOT MODIFY THIS METHOD!
         backingArray = (T[]) new Object[INITIAL_CAPACITY];
         size = 0;
     }
@@ -44,7 +44,7 @@ public class ArrayList<T> {
         if (data == null) {
             throw new IllegalArgumentException();
         }
-        
+
         if (size >= INITIAL_CAPACITY) {
             T[] temp = (T[]) new Object[backingArray.length * 2];
 
@@ -61,7 +61,7 @@ public class ArrayList<T> {
 
             backingArray[0] = data;
         }
-        
+
         size++;
     }
 
@@ -78,7 +78,7 @@ public class ArrayList<T> {
             throw new IllegalArgumentException();
         }
 
-        // if the array is at capacity, 
+        // if the array is at capacity,
         if (size >= INITIAL_CAPACITY) {
             T[] temp = (T[]) new Object[backingArray.length * 2];
 
@@ -88,9 +88,9 @@ public class ArrayList<T> {
 
             backingArray = temp;
         }
-        
+
         backingArray[size] = data;
-        
+
         size++;
     }
 
@@ -108,7 +108,7 @@ public class ArrayList<T> {
      */
     public T removeFromFront() {
         if (size == 0) {
-           throw new NoSuchElementException();
+            throw new NoSuchElementException();
         }
 
         T returnData = backingArray[0];
@@ -120,7 +120,7 @@ public class ArrayList<T> {
         }
 
         size--;
-        
+
         backingArray[size] = null;
 
         return returnData;
@@ -141,7 +141,7 @@ public class ArrayList<T> {
             throw new NoSuchElementException();
         }
 
-        T returnData = backingArray[size-1];
+        T returnData = backingArray[size - 1];
 
         backingArray[size - 1] = null;
 
