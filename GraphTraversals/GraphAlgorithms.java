@@ -34,6 +34,8 @@ public class GraphAlgorithms {
      *
      * You may assume that the passed in start vertex and graph will not be null.
      * You may assume that the start vertex exists in the graph.
+     * 
+     * Should use three data structures, queue
      *
      * @param <T>   The generic typing of the data.
      * @param start The vertex to begin the bfs on.
@@ -41,7 +43,33 @@ public class GraphAlgorithms {
      * @return List of vertices in visited order.
      */
     public static <T> List<Vertex<T>> bfs(Vertex<T> start, Graph<T> graph) {
-        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        var vertices = new ArrayList<Vertex<T>>();
+        var verticesRemaining = new LinkedList<Vertex<T>>();
+        var visitedSet = new HashSet<Vertex<T>>();
+        var adjList = graph.getAdjList();
+
+        vertices.add(start);
+        visitedSet.add(start);
+        verticesRemaining.add(start);
+
+        while (verticesRemaining.size() > 0) {
+            var current = verticesRemaining.pop();
+
+            var values = adjList.get(current);
+            if (values != null) {
+                for (VertexDistance<T> vertexDistance : values) {
+                    var currentVertex = vertexDistance.getVertex();
+
+                    if (!visitedSet.contains(currentVertex)) {
+                        vertices.add(currentVertex);
+                        visitedSet.add(currentVertex);
+                        verticesRemaining.add(currentVertex);
+                    }
+                }
+            }
+        }
+
+        return vertices;
     }
 
     /**
@@ -73,6 +101,35 @@ public class GraphAlgorithms {
      * @return List of vertices in visited order.
      */
     public static <T> List<Vertex<T>> dfs(Vertex<T> start, Graph<T> graph) {
-        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        var verticesTraversed = new ArrayList<Vertex<T>>();
+        var visitedSet = new HashSet<Vertex<T>>();
+        var verticesRemaining = new LinkedList<Vertex<T>>();
+        var adjacencies = graph.getAdjList();
+
+        verticesTraversed.add(start);
+        visitedSet.add(start);
+
+        depthFirst(start, adjacencies, verticesTraversed, verticesRemaining, visitedSet);
+
+        return verticesTraversed;
+    }
+
+    private static <T> void depthFirst(
+            Vertex<T> current,
+            Map<Vertex<T>, List<VertexDistance<T>>> adjacencies,
+            List<Vertex<T>> verticesTraversed,
+            LinkedList<Vertex<T>> verticesRemaining,
+            HashSet<Vertex<T>> visitedSet) {
+        var values = adjacencies.get(current);
+        if (values != null) {
+            for (VertexDistance<T> vertexDistance : values) {
+                var currentVertex = vertexDistance.getVertex();
+                if (!visitedSet.contains(currentVertex)) {
+                    verticesTraversed.add(currentVertex);
+                    visitedSet.add(currentVertex);
+                    depthFirst(currentVertex, adjacencies, verticesTraversed, verticesRemaining, visitedSet);
+                }
+            }
+        }
     }
 }
