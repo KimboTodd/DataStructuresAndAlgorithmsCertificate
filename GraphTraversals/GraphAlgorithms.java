@@ -187,6 +187,7 @@ public class GraphAlgorithms {
             }
         }
         visitedSet.add(start);
+
         while (!priorityQueue.isEmpty() && visitedSet.size() != validNumberEdges) {
             var poppedEdge = priorityQueue.poll();
             Vertex<T> destinationVertex = poppedEdge.getV();
@@ -207,10 +208,6 @@ public class GraphAlgorithms {
                     }
                 }
             }
-        }
-
-        if (!priorityQueue.isEmpty()) {
-            return null;
         }
 
         if (mSTedgeSet.size() != validNumberEdges) {
